@@ -10,7 +10,8 @@ Send POST  request to a given URL
 
 ####Install:
 
-    git clone 
+    git clone https://github.com/openbridge/api-datavault
+    cd api-datavault/openbridge
     python setup.py install
 
 ####Examples:

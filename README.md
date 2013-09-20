@@ -35,14 +35,14 @@ https://api.openbridge.io/user/"product-id"/"account-sid"/"version"
 <h3>Response Codes</h3>
 Standard HTTP 1.1 status codes denote the status of your request. The following are a few of the key response codes for a request
 
-<h2>Successful Request: 202 Accepted</h2>
+<h4>Successful Request: 202 Accepted</h4>
 The request and data payload has been accepted by our system. However, there is additional processing that has not been completed downstream. For example, you may have setup various "in-flight" data transformation activities to occur on all request payloads for a given Datavault. 
 
 
-<h2>Request Not Allowed: 403 Forbidden</h2>
+<h4>Request Not Allowed: 403 Forbidden</h4>
 We got the request, but will not fulfill it. The request SHOULD NOT be repeated unless there was an issue in how you are supplying your API Key. Please note, if the API Key was recently provisioned it may take between 5-10 minutes to have it propogate into our system. If you are still having an issue you can contact support for assistance.
 
-<h2>System Availability: 503 Service Unavailable</h2>
+<h4>System Availability: 503 Service Unavailable</h4>
 Our systems is unable to handle your request. This is likely temporary and you should make sure you rety the request
 
 More on HTTP 1.1 status codes can be found here: http://www.w3.org/Protocols/rfc2616/rfc2616.html

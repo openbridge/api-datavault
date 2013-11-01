@@ -62,6 +62,17 @@ This provides a simple, yet effective mechnism to identify changes over time and
 
 <h3>API Key</h3>
 
+Is a unique 32 bit key associated with URL that needs to be send as part of the payload. 
+
+`"api_key" ` is a required field in JSON payload.
+
+For example:
+
+`{"foo":"bar", "api_key":"Y20YVVNCESCVNL6S03H3HIPMT7NKTKV6"}`
+
+ If API Key doesn't associated with URL, then the server will throw 403 error. One key can authenticate only one URL.
+
+
 <h3>Keep it safe, keep it hidden</h3>
 
 Please keep your API Key and your URL secure. Treat them like you would your username and password. 

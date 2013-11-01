@@ -17,7 +17,7 @@ Send POST  request to a given URL
 ####Examples:
     
     from openbridge.post import poster
-    response = poster.send_json_post_request({'fooo':'bar'}, 'https://api.openbridge.io/user/foo/bar/1')
-    print response.status_code     # 200
+    response = poster.send_json_post_request({'fooo':'bar', 'api_key':'Y20YVVMCESCVNL6S03H3HIPMT7NKTKV6'}, 'https://api.openbridge.io/user/foo/bar/1')
+    print response.status_code     # 202
     print response.ok              # ok
     print response.url             # u'https://api.openbridge.io/user/foo/bar/1' 

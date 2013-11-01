@@ -3,7 +3,8 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 
 requires = [
-        'requests'
+        'requests',
+        'jsonschema',
     ]
 
 ver = sys.version_info[1]

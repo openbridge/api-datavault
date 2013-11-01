@@ -8,8 +8,10 @@ send_json_post_request(payload, url)
     4. get and return response from the server
 """
 
-import requests
 import json
+
+import requests
+import jsonschema
 try:
     import rfc3987
 except ImportError:
@@ -22,9 +24,22 @@ log = logging.getLogger()
 
 SCHEME = 'https'
 DOMAIN = 'api.openbridge.io'
-PATH = '/user'
+PATH = 'user'
+SCHEMA = {
+    "properties": {
+        "api_key": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "api_key"
+    ],
+    "title": "payload schema",
+    "type": "object"
+}
 
-def send_json_post_request(payload, url):
+
+def send_json_post_request(payload, url, force_url_checking=True):
     """
     Send payload in a given serialization format
 
@@ -34,12 +49,17 @@ def send_json_post_request(payload, url):
     :type url: string
     :param url: A url that was provided by openbridge.
 
+    :type force_url_checking: bool
+    :param force_url_checking: If set to true than url will be forced to follow SCHEME,
+    DOMAIN and PATH, specified above. If False, then post request will be sent to the "url"
+
     :rtype: int
     :return: HTTP response codea.
     """
     headers = {'content-type': 'application/x-www-form-urlencoded'}
     pld = convert_payload(payload, serialization='JSON')
-    check_url(url)
+    if force_url_checking:
+        check_url(url)
     response = make_request(headers, url, pld)
     return response
 
@@ -56,7 +76,7 @@ def make_request(headers, url, payload, max_retries=5):
     :param url: A url, that was provided by openbridge.
 
     :type payload: dict
-    :param payload: A dictionary of key value pairs that will be send to the system.
+    :param payload: A dictionary of key value pairs will be send to the system.
 
     :type max_retries: int
     :param max_retries: Number of times retry to connect.
@@ -67,14 +87,17 @@ def make_request(headers, url, payload, max_retries=5):
     response = None
     for retries in range(1, 1 + max_retries):
         try:
-            response = requests.post(url, data=payload, verify=False, headers=headers)
+            response = requests.post(url, data=payload, verify=False,
+                                     headers=headers)
             if response.status_code > 499:
-                time.sleep(30)
+                time.sleep(1)
                 if retries == max_retries:
-                    log.error("downloading %s: server-side error (%d)" % (url, response.status_code))
+                    log.error("downloading %s: server-side error (%d)" %
+                              (url, response.status_code))
                     return response
             elif response.status_code > 399:
-                log.error("downloading %s: client-side error (%d)" % (url, response.status_code))
+                log.error("downloading %s: client-side error (%d)" %
+                          (url, response.status_code))
                 return response
             #TODO: if internet connection goes down.
             else:
@@ -100,16 +123,16 @@ def convert_payload(payload, serialization):
     :rtype: string
     :return: String representation of JSON
     """
-
     if serialization == 'JSON':
         if isinstance(payload, dict):
             try:
+                jsonschema.validate(payload, SCHEMA)
                 pld = json.dumps(payload)
                 return pld
             except (TypeError, ValueError) as err:
-                print 'ERROR', err
+                 logging.error('ERROR % ' % err)
         else:
-            raise Exception('Payload is not a valid python dictionary, check http://docs.python.org/2/library/stdtypes.html#dict for reference')
+            raise Exception('Payload is not a valid python dictionary')
 
 def check_url(url):
     """
@@ -126,15 +149,19 @@ def check_url(url):
         if (scheme+'://' and domain) in url:
             return True
         else:
-            raise Exception("URL %s should begin with %s://%s" % (url, scheme, domain))
+            raise Exception("URL %s should begin with %s://%s" % (url,
+                                                                  scheme,
+                                                                  domain))
 
     pieces = rfc3987.parse(url, 'URI')
     if scheme != pieces['scheme']:
         raise Exception('%s should be %s' % (pieces['scheme'], SCHEME))
     if domain != pieces['authority']:
         raise Exception('%s should be %s' %(pieces['authority'], DOMAIN))
-    if path != pieces['path']:
-        raise Exception('URL should start with %s://%s%s' % (SCHEME, DOMAIN, PATH))
+    if path != pieces['path'].split('/')[1]:
+        raise Exception('URL should start with %s://%s%s' % (SCHEME,
+                                                             DOMAIN,
+                                                             PATH))
     return True
 
 

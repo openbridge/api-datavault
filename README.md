@@ -70,7 +70,7 @@ For example:
 
 `{"foo":"bar", "api_key":"Y20YVVNCESCVNL6S03H3HIPMT7NKTKV6"}`
 
- If API Key doesn't associated with URL, then the server will throw 403 error. One key can authenticate only one URL.
+ If API Key is not associated with URL, then the server will throw 403 error. For security purposes each key can authenticate the URL it was provisioned with. If you attempt to use a API Key associated with another URL the server will reject the request. Also, if the API key has been expired or invalidated the server will not allow further requests for that specific URL.
 
 
 <h3>Keep it safe, keep it hidden</h3>

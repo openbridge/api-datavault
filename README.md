@@ -77,7 +77,6 @@ For example:
 
 Please keep your API Key and your URL secure. Treat them like you would your username and password. 
 
-<h2>Error Handling</h2>
 
 
 

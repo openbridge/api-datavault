@@ -85,25 +85,18 @@ def make_request(headers, url, payload, max_retries=5):
     :return: Response from request
     """
     response = None
-    for retries in range(1, 1 + max_retries):
-        try:
-            response = requests.post(url, data=payload, verify=False,
-                                     headers=headers)
-            if response.status_code > 499:
-                time.sleep(1)
-                if retries == max_retries:
-                    log.error("downloading %s: server-side error (%d)" %
-                              (url, response.status_code))
-                    return response
-            elif response.status_code > 399:
-                log.error("downloading %s: client-side error (%d)" %
-                          (url, response.status_code))
-                return response
-            #TODO: if internet connection goes down.
-            else:
-                break
-        except Exception as error:
-            logging.error("downloading %s: %s" % (url, error))
+    response = requests.post(url, data=payload, verify=False,
+                             headers=headers)
+    if response.status_code > 499:
+        time.sleep(1)
+        if retries == max_retries:
+            log.error("downloading %s: server-side error (%d)" %
+                      (url, response.status_code))
+            return response
+    elif response.status_code > 399:
+        log.error("downloading %s: client-side error (%d)" %
+                  (url, response.status_code))
+        return response
     return response
 
 

@@ -2,9 +2,11 @@
 
 <h2>OVERVIEW</h2>
 
-The API can use use a schema or schema-less approach. The API is a powerful data injest service using standard HTTPS POST/GET for fast and easy data colection.
+The API is a powerful data injest service using standard HTTPS POST/GET for fast and easy data colection. The Openbridge API acts as a trusted broker between a client and a third party service enpoint. Those service endpoints can be RESTful, SOAP or any other HTTP based connection. By routing requests through the broker the process of exposing data that may otherwise be resident in a downstream system that is diffuclt to access or completely unavailable. 
 
-The Openbridge API acts as a trusted broker between a client and a third party service enpoint. Those service endpoints can be RESTful, SOAP or any other HTTP based connection. By routing requests through the broker the process of exposing data that may otherwise be resident in a downstream system that is diffuclt to access or completely unavailable. 
+The basic process looks like this;
+<li>x</li>
+
 
        +--------------+    +---------------+    +---------------+
        |              |    |               |    |               |
@@ -28,7 +30,7 @@ The Openbridge API acts as a trusted broker between a client and a third party s
 All requests from clients and responses from enpoints are captured and stored by the broker. The broker supports any HTTP client, in any programming language, that can perform a HTTPS POST/GET to interact with the broker API. Openbridge will setup a dedicated broker for your account and supply a private URL to be used by clients for making POST/GET calls to service endpoints. 
 
 
-<h2>DESCRIPTION</h2>
+<h2HOW IT WORKS</h2>
 
 When you initiate a connection to Openbridge, there are some basic requirements that need to be met in order to successfully send data to a vault. The documentation outlined below assumes your are embedding the API URL into your client application. 
 
@@ -47,13 +49,12 @@ https://xxxxx/user/"product-id"/"account-sid"/"version"
 
 <h2>RESPONSE CODES</h2>
 
-
 The Openbridge Broker API will echo back to your client the response codes presented to us by the service endpoint. Those may be a combination of HTTP response codes as well as application specific codes resident in a response payload. Your application should take care to handle both situations. For example, is the Openbridge Broker API responds to your request with "Request Not Allowed: 403 Forbidden". This means the service enpoint has rejected the request, possibly due to an issue in how you are supplying your credentials. Please note, if the API Key was recently provisioned it may take between 5-10 minutes to have it propogate into our system. If you are still having an issue you can contact support for assistance.
 
 
 
 
-Request Body
+<h2>Request Body</h2>
 
 JSON
 

@@ -6,9 +6,9 @@ The API is a powerful data injest service using standard HTTPS POST/GET for fast
 
 The basic process looks like this;
 <ul>
-<li>CLIENT:</li>
-<li>BROKER:</li>
-<li>STORAGE: All requests from clients and responses from enpoints are captured and stored by the broker. The broker supports any HTTP client, in any programming language, that can perform a HTTPS POST/GET to interact with the broker API. Openbridge will setup a dedicated broker for your account and supply a private URL to be used by clients for making POST/GET calls to service endpoints.</li>
+<li><strong>CLIENT:</strong></li>
+<li><strong>BROKER:</strong></li>
+<li><strong>STORAGE:</strong> All requests from clients and responses from enpoints are captured and stored by the broker. The broker supports any HTTP client, in any programming language, that can perform a HTTPS POST/GET to interact with the broker API. Openbridge will setup a dedicated broker for your account and supply a private URL to be used by clients for making POST/GET calls to service endpoints.</li>
 <li>SERVICE ENDPOINT:</li>
 </ul>
 

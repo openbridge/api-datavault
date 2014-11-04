@@ -36,11 +36,9 @@ The basic process looks like this;
 <h2>HOW IT WORKS</h2>
 When you initiate a connection to Openbridge, there are some basic requirements that need to be met in order to successfully send data to a vault. The documentation outlined below assumes your are embedding the API URL into your client application. 
 
-BASE URL
-
+<h3>Base URL</h3>
 All Broker API URLs referenced in this documentation have the following base
-
-https://XXX
+<pre>https://XXX</pre>
 
 The Openbridge Broker API is served over HTTPS. Unencrypted HTTP is not allowed.
 

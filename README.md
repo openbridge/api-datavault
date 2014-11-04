@@ -5,6 +5,7 @@
 The API is a powerful data injest service using standard HTTPS POST/GET for fast and easy data colection. The Openbridge API acts as a trusted broker between a client and a third party service enpoint. Those service endpoints can be RESTful, SOAP or any other HTTP based connection. By routing requests through the broker the process of exposing data that may otherwise be resident in a downstream system that is diffuclt to access or completely unavailable. 
 
 The basic process looks like this;
+
        +--------------+    +---------------+    +---------------+
        |              |    |               |    |               |
        |              |+-->|               |+-->|               |

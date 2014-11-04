@@ -5,7 +5,12 @@
 The API is a powerful data injest service using standard HTTPS POST/GET for fast and easy data colection. The Openbridge API acts as a trusted broker between a client and a third party service enpoint. Those service endpoints can be RESTful, SOAP or any other HTTP based connection. By routing requests through the broker the process of exposing data that may otherwise be resident in a downstream system that is diffuclt to access or completely unavailable. 
 
 The basic process looks like this;
-<ul><li>x</li></ul>
+<ul>
+<li>CLIENT:</li>
+<li>BROKER:</li>
+<li>STORAGE: All requests from clients and responses from enpoints are captured and stored by the broker. The broker supports any HTTP client, in any programming language, that can perform a HTTPS POST/GET to interact with the broker API. Openbridge will setup a dedicated broker for your account and supply a private URL to be used by clients for making POST/GET calls to service endpoints.</li>
+<li>SERVICE ENDPOINT:</li>
+</ul>
 
 
        +--------------+    +---------------+    +---------------+
@@ -27,11 +32,9 @@ The basic process looks like this;
                            +---------------+
 
 
-All requests from clients and responses from enpoints are captured and stored by the broker. The broker supports any HTTP client, in any programming language, that can perform a HTTPS POST/GET to interact with the broker API. Openbridge will setup a dedicated broker for your account and supply a private URL to be used by clients for making POST/GET calls to service endpoints. 
 
 
-<h2HOW IT WORKS</h2>
-
+<h2>HOW IT WORKS</h2>
 When you initiate a connection to Openbridge, there are some basic requirements that need to be met in order to successfully send data to a vault. The documentation outlined below assumes your are embedding the API URL into your client application. 
 
 BASE URL
